@@ -6,9 +6,9 @@ const CreateTaskPage = () => {
   return (
     <div className='max-w-xl space-y-3'>
         <TextField.Root>
-            <TextField.Input placeholder='task name' />
+            <TextField.Input placeholder='task name' required/>
         </TextField.Root>
-        <TextArea placeholder='description...'/>
+        <TextArea placeholder='description...' required />
         <Button>Create New Task</Button>
     </div>
   )
