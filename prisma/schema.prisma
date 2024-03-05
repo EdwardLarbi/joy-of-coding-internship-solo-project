@@ -14,6 +14,6 @@ model Task {
   id          Int      @id @default(autoincrement())
   name        String   @db.VarChar(255)
   description String   @db.Text
-  dueDate     DateTime
+  dueDate     String
   createdAt   DateTime @default(now())
 }

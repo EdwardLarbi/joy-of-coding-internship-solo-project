@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"; 
 import prisma from "@/prisma/client"
-import { createtaskSchema } from "@/app/validationSchema"; 
+import { createtaskSchema } from "../../validationSchema"; 
 
 export async function POST(request: NextRequest) {
     const body = await request.json();
@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(validation.error.errors, { status:400 })
 
     const newTask = await prisma.task.create({
-        data: {name: body.title, description: body.description, dueDate: body.dueDate}
+        data: {name: body.name, description: body.description, dueDate: body.dueDate}
     });
 
     return NextResponse.json(newTask, { status: 201 })
