@@ -1,13 +1,15 @@
+import React from 'react'
 import { Button, Table } from '@radix-ui/themes';
 import prisma from "@/prisma/client"
 import Link from 'next/link';
 
-export default async function Home() {
-  const myTasks = await prisma.task.findMany();
-  console.log(myTasks);
+const OrganizePage = async () => {
+    const myTasks = await prisma.task.findMany({
+        where: { dueDate: 'today' }
+    });
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Button><Link href='/new'>Create Task</Link></Button>
       <Button><Link href='/delete'>Delete Task</Link></Button>
       <Button><Link href='/edit'>Edit Task</Link></Button>
 
@@ -35,5 +37,7 @@ export default async function Home() {
         </Table.Body>
       </Table.Root>
     </main>
-  );
+  )
 }
+
+export default OrganizePage
