@@ -1,39 +1,28 @@
-import { Button, Table } from '@radix-ui/themes';
-import prisma from "@/prisma/client"
-import Link from 'next/link';
+import Link from 'next/link'
+import { Container, Strong, Button } from '@radix-ui/themes';
+import { FaTasks } from "react-icons/fa";
+import { MdAddTask } from "react-icons/md";
+import { FcSerialTasks } from "react-icons/fc";
+import { FcParallelTasks } from "react-icons/fc";
+import { MdOutlineTask } from "react-icons/md";
+import { IconButton } from '@radix-ui/themes';
 
-export default async function Home() {
-  const myTasks = await prisma.task.findMany();
-  console.log(myTasks);
+
+const HomePage = () => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Button><Link href='/new'>Create Task</Link></Button>
-      <Button><Link href='/delete'>Delete Task</Link></Button>
-      <Button><Link href='/edit'>Edit Task</Link></Button>
-
-      <Table.Root>
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell>Task</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Task ID</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Description</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Due Date</Table.ColumnHeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {
-            myTasks.map(
-              (myTask)=>
-              <Table.Row key={myTask.id}>
-                <Table.RowHeaderCell>{myTask.name}</Table.RowHeaderCell>
-                <Table.Cell>{myTask.id}</Table.Cell>
-                <Table.Cell>{myTask.description}</Table.Cell>
-                <Table.Cell>{myTask.dueDate}</Table.Cell>
-              </Table.Row>
-            )
-          }
-        </Table.Body>
-      </Table.Root>
+      
+      <Container><Button><Link href='/tasks'>see your tasks</Link></Button></Container>
+      
+      <Container><IconButton><FaTasks /></IconButton> <Strong>Create Tasks</Strong></Container>
+      <Container><IconButton><MdAddTask /></IconButton> <Strong>Change your mind?? Edit them...</Strong></Container>
+      <Container><IconButton><FcSerialTasks /></IconButton> <Strong>Delete tasks you no longer need</Strong></Container>
+      <Container><IconButton><FcParallelTasks /></IconButton> <Strong>View tasks only due today  </Strong></Container>
+      <Container><IconButton><MdOutlineTask /></IconButton> <Strong>So much more...</Strong></Container>
+      
     </main>
-  );
+
+  )
 }
+
+export default HomePage

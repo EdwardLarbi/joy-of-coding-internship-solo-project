@@ -10,7 +10,7 @@ export const PUT = async (req: Request) => {
         const id = req.url.split("tasks/")[1];
         console.log("do the prisma edit now!");
         const updatedtask = await prisma.task.update({
-            where: { id: parseInt(body.id) },
+            where: { id: parseInt(id) },
             data: {
                 description : body.description,
                 name: body.name,
@@ -28,15 +28,34 @@ export const DELETE = async (req: Request, res: Response) => {
     try {
         const id = req.url.split("tasks/")[1];
         console.log("do the prisma deletion now!");
-        const deletedUser = await prisma.task.delete({
+        const deletedTask = await prisma.task.delete({
             where: {
                 id: parseInt(id)
             }
         })
-        console.log(deletedUser);
+        console.log(deletedTask);
 
         return NextResponse.json({message: "ok"}, {status: 200});
     }   catch (err) {
         return NextResponse.json({ message: "Error", err }, { status: 500 });
     }
 }
+
+export const GET = async (req: Request) => {
+    try{
+        const id = req.url.split("tasks/")[1];
+        const selectedTask = await prisma.task.findUnique({
+            where: {
+                id: parseInt(id)
+            }
+        })
+        console.log(selectedTask);
+        return NextResponse.json({message: "ok"}, {status: 200});
+        
+    } catch (err){
+        return NextResponse.json(
+            {message: "Error", err},
+            { status: 500},
+        );
+    }
+};

@@ -7,7 +7,7 @@ import { GrTasks } from "react-icons/gr";
 
 const NavBar = () => {
     const navLinks = [
-        {href: '/', label: 'Dashboard'},
+        {href: '/', label: 'Home Page'},
         {href: '/organize', label: 'Filter Today'}
     ]
 
