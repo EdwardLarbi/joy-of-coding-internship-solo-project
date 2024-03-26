@@ -14,6 +14,7 @@ export const PUT = async (req: Request) => {
             data: {
                 description : body.description,
                 name: body.name,
+                dueDate: body.dueDate,
             }
         });
         console.log(updatedtask);
